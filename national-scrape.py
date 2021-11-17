@@ -70,7 +70,7 @@ def get_tsa():
     data = data.sort_values(["month", "day"], ascending=(True, True))
     data
     print('done!')
-    return (data.to_csv("tsa.csv"))
+    return (data.to_csv("data/tsa.csv"))
 
 
 get_tsa()
