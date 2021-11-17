@@ -9,7 +9,6 @@ import time
 import json
 import fnmatch
 import os
-import tabula
 import numpy as np
 import urllib.request
 
