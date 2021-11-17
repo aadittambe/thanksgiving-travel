@@ -30,7 +30,9 @@ jobs:
     - uses: actions/checkout@v2
     - name: scrape
       run: python national-scrape.py
-    - name: Commit and push if it changed
+    - name: add
       run: git add --all
+    - name: commit
       run: git commit -m "Latest data ${timestamp}" 
+    - name: push
       run: git push
