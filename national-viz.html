@@ -5,24 +5,106 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="author" content="Aadit Tambe">
+    <title>TSA throughput data</title>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script> -->
 
+    <style>
+        #container {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            padding-left: 20px;
+            padding-top: 10px;
+            padding-right: 30px;
+            padding-bottom: 10px;
+            border-left: 1px solid black;
+            border-bottom: 14px solid black;
+            border-top: 1px solid black;
+            border-right: 1px solid black;
+            box-shadow: 5px 5px 10px gainsboro;
+            min-width: 300px;
+            max-width: 600px;
+            height: auto;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @media only screen and (max-width: 600px) {
+            /* optional media queries */
+        }
+
+        @media only screen and (max-width: 450px) {
+
+            /* media query for h1 */
+            h1 {
+                font-size: 18px;
+            }
+        }
+
+        h1 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 24px;
+            fill: #2c2c2c;
+            margin-bottom: -2px;
+            margin-top: 10px;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-family: 'Source Serif Pro', serif;
+
+            fill: grey;
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 1.2;
+            margin-bottom: 10px;
+            margin-top: 5px;
+        }
+
+        h3 {
+            font-family: 'Poppins', sans-serif;
+            fill: grey;
+            font-weight: 300;
+            font-size: 12px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            margin-top: 10px;
+        }
+
+        h4 {
+            font-family: 'Poppins', sans-serif;
+            fill: grey;
+            font-weight: 300;
+            font-size: 12px;
+            margin-top: 0px;
+            margin-bottom: 10px;
+            margin-top: 10px;
+
+        }
+    </style>
 </head>
 
 <body>
-    <div id="wrapper">
-        <canvas id="canvas">
+    <div id="container">
+        <h1>THis graphic shows tktktktktktkktktk</h1>
+        <h4>BY AADIT TAMBE</h4>
+        <h2>here's what's up tktktktktkkktktkktktktkktkktktkktk</h2>
+        <div id="wrapper">
+            <canvas id="canvas">
 
-        </canvas>
+            </canvas>
+        </div>
+        <h4>Source: Transportation and Security Administration</h5>
+            <h4>Note: This chart updates automatically at tktktktk time every day tktktk.</h4>
     </div>
     <script>
 
 
-        let filename = "tsa.csv"
+        let filename = "https://raw.githubusercontent.com/aadittambe/thanksgiving-travel/main/tsa.csv"
 
         d3.csv(filename).then(function (loadedData) {
             // console.log(loadedData)
@@ -65,7 +147,7 @@
                             fill: false,
                             pointRadius: 1,
                             pointHoverRadius: 1,
-                            borderWidth: 2
+                            borderWidth: 1
                             // borderColor: Utils.CHART_COLORS.blue,
                         },
                         {
