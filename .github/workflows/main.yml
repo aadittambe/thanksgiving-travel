@@ -31,7 +31,6 @@ jobs:
     - name: scrape
       run: python national-scrape.py
     - name: Commit and push if it changed
-      run: 
-        git add -A
-        git commit -m "Latest data ${timestamp}" 
-        git push
+      run: git add --all
+      run: git commit -m "Latest data ${timestamp}" 
+      run: git push
