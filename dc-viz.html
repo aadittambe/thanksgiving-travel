@@ -5,13 +5,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Aadit Tambe">
-    <title>TSA throughput data</title>
+    <title>Document</title>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script> -->
-
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script> -->
     <style>
         #container {
             margin-top: 20px;
@@ -90,7 +88,7 @@
 
 <body>
     <div id="container">
-        <h1>THis graphic shows tktktktktktkktktk</h1>
+        <h1>dc airports graphic shows tktktktktktkktktk</h1>
         <h4>BY AADIT TAMBE</h4>
         <h2>here's what's up tktktktktkkktktkktktktkktkktktkktk</h2>
         <div id="wrapper">
@@ -104,25 +102,25 @@
     <script>
 
 
-        let filename = "https://raw.githubusercontent.com/aadittambe/thanksgiving-travel/main/tsa.csv"
+        let filename = "dc-data/final/final.csv"
 
         d3.csv(filename).then(function (loadedData) {
             // console.log(loadedData)
-            let data_21 = [];
-            let data_20 = [];
-            let data_19 = [];
+            let bwi = [];
+            let dca = [];
+            let iad = [];
             let labels = [];
             for (let i = 0; i < loadedData.length; i++) {
                 // console.log(loadedData[i])
 
-                let year = loadedData[i].formatted_date;
+                let year = loadedData[i].end_formatted;
                 labels.push(year)
-                let throughput_21 = loadedData[i]["2021-throughput"];
-                data_21.push(throughput_21);
-                let throughput_20 = loadedData[i]["2020-throughput"];
-                data_20.push(throughput_20);
-                let throughput_19 = loadedData[i]["2019-throughput"];
-                data_19.push(throughput_19);
+                let throughput_bwi = loadedData[i]["BWI"];
+                bwi.push(throughput_bwi);
+                let throughput_iad = loadedData[i]["IAD"];
+                iad.push(throughput_iad);
+                let throughput_dca = loadedData[i]["DCA"];
+                dca.push(throughput_dca);
                 // data
             }
             window.chartColors = {/*CNS colors*/
@@ -140,44 +138,36 @@
                     labels: labels,  // the labels we loaded!
                     datasets: [
                         {
-                            label: "2021",
+                            label: "BWI",
                             backgroundColor: window.chartColors.red,
                             borderColor: window.chartColors.red,
-                            data: data_21,
+                            data: bwi,
                             fill: false,
                             pointRadius: 1,
                             pointHoverRadius: 1,
-                            borderWidth: 1
+                            borderWidth: 1,
                             // borderColor: Utils.CHART_COLORS.blue,
                         },
                         {
-                            label: "2020",
+                            label: "DCA",
                             fill: false,
                             backgroundColor: window.chartColors.yellow,
                             borderColor: window.chartColors.yellow,
-                            data: data_20,
+                            data: dca,
                             pointRadius: 1,
                             pointHoverRadius: 1,
                             borderWidth: 1,
                         },
                         {
-                            label: "2019",
+                            label: "IAD",
                             fill: false,
                             backgroundColor: window.chartColors.grey,
                             borderColor: window.chartColors.grey,
-                            data: data_19,
+                            data: iad,
                             pointRadius: 1,
                             pointHoverRadius: 1,
                             borderWidth: 1,
                         },
-                        // {
-                        //     label: 'ads',
-                        //     data: data_19,    // the data we loaded!
-                        //     fill: false,
-                        //     pointRadius: 0,
-                        //     pointHoverRadius: 0,
-                        //     borderColor: 'yellow',
-                        // }
                     ]
                 },
                 options: {
@@ -186,10 +176,6 @@
                         display: true,
                         text: 'Chart.js Line Chart'
                     },
-                    // tooltips: {
-                    //     mode: 'index',
-                    //     intersect: false,
-                    // },
                     tooltips: {
                         enabled: true,
                         mode: 'label'
@@ -200,38 +186,26 @@
                     },
                     elements: {
                         line: {
-                            tension: 0.5
+                            tension: 0,
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
                         }
                     }
-                    // scales: {
-                    //     xAxes: [{
-                    //         display: true,
-                    //         scaleLabel: {
-                    //             display: true,
-                    //             labelString: 'Month'
-                    //         }
-                    //     }],
-                    //     yAxes: [{
-                    //         display: true,
-                    //         scaleLabel: {
-                    //             display: true,
-                    //         },
-                    //     }]
-                    // }
                 }
             };
             var ctx = document.getElementById("canvas").getContext("2d");
             var myLine = new Chart(ctx, options);
-            $(window).bind('beforeunload', function () {
-
-                //save info somewhere
-
-                console.log('reload');
-                myLine.update()
-
-            });
-            // setInterval(function () { updateChart() }, 1000);
         })
+
+        // const airports = document.getElementById('airports');
+        // airports.addEventListener('change', airportsTracker);
+
+        // function airportsTracker() {
+        //     console.log(airports.value)
+        // }
     </script>
 </body>
 
