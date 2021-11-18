@@ -71,6 +71,9 @@ def get_tsa():
     data
     print('done!')
     data.to_csv("tsa.csv")
+    with open(f'./logs/log_record{time.strftime("%Y%m%d-%H%M%S")}.txt', "w") as f:
+        f.write(
+            f'Successfully national-scrape.py ran on {time.strftime("%Y%m%d-%H%M%S")}')
 
 
 get_tsa()

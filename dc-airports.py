@@ -133,7 +133,8 @@ def get_dc_airports():
     final
     final.to_csv('dc-data/final/final.csv')
     with open(f'./logs/log_record{time.strftime("%Y%m%d-%H%M%S")}.txt', "w") as f:
-        f.write(f'Successfully ran on time.strftime("%Y%m%d-%H%M%S")')
+        f.write(
+            f'Successfully dc-airports.py ran on {time.strftime("%Y%m%d-%H%M%S")}')
 
 
 get_dc_airports()
