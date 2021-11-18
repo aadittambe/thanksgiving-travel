@@ -70,12 +70,20 @@ def get_dc_airports():
         df["date"] = f
         master = pd.concat([master, df])
 
-    master.to_csv("dc-data/final/airports.csv")
+    master  # .to_csv("dc-data/final/airports.csv")
 
-    data = pd.read_csv("dc-data/final/airports.csv", skiprows=1)
+    # analysis
+    data = master.iloc[1:, :]
     data.columns = data.columns.str.lower().str.strip()
     data = data.fillna(method='ffill')
-    data.rename(columns={data.columns[8]: "range"}, inplace=True)
+    data.rename(columns={data.columns[7]: "range"}, inplace=True)
+    data.rename(columns={data.columns[6]: "throughput"}, inplace=True)
+    data.rename(columns={data.columns[5]: "unnamed"}, inplace=True)
+    data.rename(columns={data.columns[4]: "gate"}, inplace=True)
+    data.rename(columns={data.columns[3]: "state"}, inplace=True)
+    data.rename(columns={data.columns[2]: "city"}, inplace=True)
+    data.rename(columns={data.columns[1]: "airport"}, inplace=True)
+    data.rename(columns={data.columns[0]: "time"}, inplace=True)
     data = data[["airport", "city", "state", "throughput", "range"]]
     # data['throughput'] = data['throughput'].str.replace('(Unadjusted)', '').astype(float)
     data['throughput'] = pd.to_numeric(data['throughput'], errors='coerce')
@@ -84,7 +92,7 @@ def get_dc_airports():
 #     data
     airports = data[(data["airport"] == "IAD") | (
         data["airport"] == "DCA") | (data["airport"] == "BWI")]
-    airports
+    (airports).to_csv('temp.csv')
     date_list_1 = []
     for index, row in airports.iterrows():
         split_date = row["range"].split("/")
@@ -97,6 +105,7 @@ def get_dc_airports():
         split_date = row["range"].split(".")
         date_dirty = split_date[0]
         date_list_2.append(date_dirty)
+#         print(date_list_2)
     airports["range"] = date_list_2
     date_list_start = []
     date_list_end = []
@@ -120,7 +129,7 @@ def get_dc_airports():
     final = clean_data.pivot(
         index='end', columns='airport', values='throughput').reset_index()
     final["end_formatted"] = pd.to_datetime(final["end"])
-    final["end_formatted"] = final["end_formatted"].dt.strftime('%b. %d')
+    final["end_formatted"] = final["end_formatted"].dt.strftime('%b. %d, %Y')
     final
     final.to_csv('dc-data/final/final.csv')
 
