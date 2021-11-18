@@ -5,11 +5,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>DC area airports TSA throughput data</title>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script> -->
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/1.1.0/chartjs-plugin-annotation.min.js"
+        integrity="sha512-uxcl+YXF0LbFyZFEb6HHmxl1NEI4X/5rjojm/13M1CBXBDj8wkmM99cKADkmtuky28pC/EpNTDHOEb/c3nDZsA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <style>
         #container {
             margin-top: 20px;
@@ -88,16 +92,16 @@
 
 <body>
     <div id="container">
-        <h1>dc airports graphic shows tktktktktktkktktk</h1>
-        <h4>BY AADIT TAMBE</h4>
+        <h1>Air travel is rebounding to pre-pandemic levels in DC area airports</h1>
+        <h4>BY AADIT TAMBE / CAPITAL NEWS SERVICE</h4>
         <h2>here's what's up tktktktktkkktktkktktktkktkktktkktk</h2>
         <div id="wrapper">
-            <canvas id="canvas">
+            <canvas id="canvas" style="height:1000px">
 
             </canvas>
         </div>
         <h4>Source: Transportation and Security Administration</h4>
-        <h4>Note: This chart updates automatically at tktktktk time every day tktktk.</h4>
+        <h4>This chart updates automatically with new data at 10 a.m. every day.</h4>
     </div>
     <script>
 
@@ -128,7 +132,9 @@
                 yellow: '#fbd603',
                 grey: '#666666',
                 yellowAccent: '#faa916',
-                greenAccent: '#8fd694'
+                greenAccent: '#8fd694',
+                purpleAccent: '#80217f',
+                orangeAccent: '#de5826'
             };
 
 
@@ -138,9 +144,9 @@
                     labels: labels,  // the labels we loaded!
                     datasets: [
                         {
-                            label: "BWI",
-                            backgroundColor: window.chartColors.red,
-                            borderColor: window.chartColors.red,
+                            label: "Baltimore/Washington",
+                            backgroundColor: window.chartColors.orangeAccent,
+                            borderColor: window.chartColors.orangeAccent,
                             data: bwi,
                             fill: false,
                             pointRadius: 1,
@@ -149,20 +155,20 @@
                             // borderColor: Utils.CHART_COLORS.blue,
                         },
                         {
-                            label: "DCA",
+                            label: "Reagan National",
                             fill: false,
-                            backgroundColor: window.chartColors.yellow,
-                            borderColor: window.chartColors.yellow,
+                            backgroundColor: window.chartColors.greenAccent,
+                            borderColor: window.chartColors.greenAccent,
                             data: dca,
                             pointRadius: 1,
                             pointHoverRadius: 1,
                             borderWidth: 1,
                         },
                         {
-                            label: "IAD",
+                            label: "Dulles",
                             fill: false,
-                            backgroundColor: window.chartColors.grey,
-                            borderColor: window.chartColors.grey,
+                            backgroundColor: window.chartColors.purpleAccent,
+                            borderColor: window.chartColors.purpleAccent,
                             data: iad,
                             pointRadius: 1,
                             pointHoverRadius: 1,
@@ -171,6 +177,33 @@
                     ]
                 },
                 options: {
+                    plugins: {
+                        autocolors: false,
+                        annotation: {
+                            annotations: {
+                                line1: {
+                                    adjustScaleRange: true,
+                                    drawTime: 'afterDatasetsDraw',
+                                    type: 'line',
+                                    scaleID: 'x',
+                                    value: 10,
+                                    backgroundColor: window.chartColors.grey,
+                                    label: {
+                                        content: 'National emergency',
+                                        enabled: true,
+                                        yAdjust: -30,
+                                        xAdjust: 25,
+                                        borderRadius: 2,
+                                        backgroundColor: window.chartColors.grey,
+                                        // position: 'start',
+                                        rotation: 270,
+                                        width: 1,
+                                    }
+
+                                },
+                            }
+                        }
+                    },
                     responsive: true,
                     title: {
                         display: true,
@@ -198,6 +231,7 @@
             };
             var ctx = document.getElementById("canvas").getContext("2d");
             var myLine = new Chart(ctx, options);
+
         })
 
         // const airports = document.getElementById('airports');
