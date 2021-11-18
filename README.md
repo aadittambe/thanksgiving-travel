@@ -1,4 +1,4 @@
-# Tracking air travel: See how many people are flying this Thanksgiving
+# ✈️ Tracking air travel: See how many people are flying this Thanksgiving
 
 This is a code repository for air travel trackers, as the number of passengers flying is expected to rebound to pre-coronavirus levels.
 
