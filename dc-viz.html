@@ -107,10 +107,10 @@
     <script>
 
 
-        let filename = "dc-data/final/final.csv"
+        let filename = "https://raw.githubusercontent.com/aadittambe/thanksgiving-travel/main/dc-data/final/final.csv"
 
         d3.csv(filename).then(function (loadedData) {
-            // console.log(loadedData)
+            console.log(loadedData)
             let bwi = [];
             let dca = [];
             let iad = [];
@@ -118,7 +118,7 @@
             for (let i = 0; i < loadedData.length; i++) {
                 // console.log(loadedData[i])
 
-                let year = loadedData[i].end_formatted;
+                let year = loadedData[i].start_formatted;
                 labels.push(year)
                 let throughput_bwi = loadedData[i]["BWI"];
                 bwi.push(throughput_bwi);
