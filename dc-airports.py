@@ -116,19 +116,20 @@ def get_dc_airports():
         date_list_end.append(date_end)
     airports["start"] = date_list_start
     airports["end"] = date_list_end
-    airports["end"] = pd.to_datetime(airports["end"])
+    airports["end"] = pd.to_datetime(airports["end"], errors='coerce')
     # airports["end_formatted"] = airports["end"].dt.strftime('%b. %d')
     airports
-    airports["end"] = pd.to_datetime(airports["end"])
+    airports["start"] = pd.to_datetime(airports["start"], errors='coerce')
     # airports["end_formatted"] = airports["end"].dt.strftime('%b. %d')
     airports
-    clean_data = airports.groupby(['airport', 'end'])[
+    clean_data = airports.groupby(['airport', 'start'])[
         'throughput'].agg('sum').to_frame().reset_index()
     clean_data
     final = clean_data.pivot(
-        index='end', columns='airport', values='throughput').reset_index()
-    final["end_formatted"] = pd.to_datetime(final["end"])
-    final["end_formatted"] = final["end_formatted"].dt.strftime('%b. %d, %Y')
+        index='start', columns='airport', values='throughput').reset_index()
+    final["start_formatted"] = pd.to_datetime(final["start"])
+    final["start_formatted"] = final["start_formatted"].dt.strftime(
+        '%b. %d, %y')
     final
     final.to_csv('dc-data/final/final.csv')
 
