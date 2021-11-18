@@ -4,7 +4,7 @@ This is a code repository for air travel trackers, as the number of passengers f
 
 The Capital News Service story can be viewed [here](https://cnsmaryland.org/2021/11/18/tracking-air-travel-see-how-many-people-are-flying-this-thanksgiving/).
 
-This repository houses code for two graphics — — which update automatically when TSA released new data. The web scrapers — [dc-airports.py](/dc-airports.py) and [national-scrape.py](/national-scrape.py) — are triggered using GitHub Actions.
+This repository houses code for two graphics — [national counts](https://aadittambe.github.io/thanksgiving-travel/national-viz) and [Washington, D.C. area airport counts](https://aadittambe.github.io/thanksgiving-travel/dc-viz) — which update automatically when TSA released new data. The web scrapers — [dc-airports.py](/dc-airports.py) and [national-scrape.py](/national-scrape.py) — are triggered using GitHub Actions.
 
 TSA releases daily throughput counts every day at 9 a.m., and airport-specific counts every week. [dc-airports.py](/dc-airports.py) will run every day at 10 a.m. and [national-scrape.py](/national-scrape.py) will run every Monday at 10 a.m.
 
