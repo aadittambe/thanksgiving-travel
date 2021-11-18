@@ -92,7 +92,6 @@ def get_dc_airports():
 #     data
     airports = data[(data["airport"] == "IAD") | (
         data["airport"] == "DCA") | (data["airport"] == "BWI")]
-    (airports).to_csv('temp.csv')
     date_list_1 = []
     for index, row in airports.iterrows():
         split_date = row["range"].split("/")
