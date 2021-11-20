@@ -6,7 +6,7 @@ on:
   push:
     push:
   schedule:
-    - cron: "0 16 * * *" # 11 a.m. every day
+    - cron: "0 14 * * *" # 9 a.m. every day
   workflow_dispatch:
 
   # Allows you to run this workflow manually from the Actions tab
