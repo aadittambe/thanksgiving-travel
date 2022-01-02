@@ -10,7 +10,6 @@
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script> -->
 
     <style>
         #container {
@@ -104,26 +103,27 @@
     <script>
 
 
-        let filename = "https://raw.githubusercontent.com/aadittambe/thanksgiving-travel/main/tsa.csv"
+        let filename = "tsa.csv"
 
         d3.csv(filename).then(function (loadedData) {
             // console.log(loadedData)
+            let data_22 = [];
             let data_21 = [];
             let data_20 = [];
             let data_19 = [];
             let labels = [];
             for (let i = 0; i < loadedData.length; i++) {
-                // console.log(loadedData[i])
 
                 let year = loadedData[i].formatted_date;
-                labels.push(year)
+                labels.push(year);
+                let throughput_22 = loadedData[i]["2022-throughput"];
+                data_22.push(throughput_22);
                 let throughput_21 = loadedData[i]["2021-throughput"];
                 data_21.push(throughput_21);
                 let throughput_20 = loadedData[i]["2020-throughput"];
                 data_20.push(throughput_20);
                 let throughput_19 = loadedData[i]["2019-throughput"];
                 data_19.push(throughput_19);
-                // data
             }
             window.chartColors = {/*CNS colors*/
                 red: '#990000',
@@ -137,8 +137,18 @@
             let options = {
                 type: 'line',
                 data: {
-                    labels: labels,  // the labels we loaded!
+                    labels: labels,
                     datasets: [
+                        {
+                            label: "2022",
+                            backgroundColor: window.chartColors.greenAccent,
+                            borderColor: window.chartColors.greenAccent,
+                            data: data_22,
+                            fill: false,
+                            pointRadius: 1,
+                            pointHoverRadius: 1,
+                            borderWidth: 1
+                        },
                         {
                             label: "2021",
                             backgroundColor: window.chartColors.red,
@@ -147,8 +157,7 @@
                             fill: false,
                             pointRadius: 1,
                             pointHoverRadius: 1,
-                            borderWidth: 1
-                            // borderColor: Utils.CHART_COLORS.blue,
+                            borderWidth: 1,
                         },
                         {
                             label: "2020",
@@ -170,14 +179,6 @@
                             pointHoverRadius: 1,
                             borderWidth: 1,
                         },
-                        // {
-                        //     label: 'ads',
-                        //     data: data_19,    // the data we loaded!
-                        //     fill: false,
-                        //     pointRadius: 0,
-                        //     pointHoverRadius: 0,
-                        //     borderColor: 'yellow',
-                        // }
                     ]
                 },
                 options: {
@@ -186,10 +187,6 @@
                         display: true,
                         text: 'Chart.js Line Chart'
                     },
-                    // tooltips: {
-                    //     mode: 'index',
-                    //     intersect: false,
-                    // },
                     tooltips: {
                         enabled: true,
                         mode: 'label'
@@ -203,34 +200,14 @@
                             tension: 0.5
                         }
                     }
-                    // scales: {
-                    //     xAxes: [{
-                    //         display: true,
-                    //         scaleLabel: {
-                    //             display: true,
-                    //             labelString: 'Month'
-                    //         }
-                    //     }],
-                    //     yAxes: [{
-                    //         display: true,
-                    //         scaleLabel: {
-                    //             display: true,
-                    //         },
-                    //     }]
-                    // }
                 }
             };
             var ctx = document.getElementById("canvas").getContext("2d");
             var myLine = new Chart(ctx, options);
             $(window).bind('beforeunload', function () {
-
-                //save info somewhere
-
                 console.log('reload');
                 myLine.update()
-
             });
-            // setInterval(function () { updateChart() }, 1000);
         })
     </script>
 </body>
