@@ -239,6 +239,3 @@ d3.csv("https://raw.githubusercontent.com/aadittambe/thanksgiving-travel/main/ts
 
 
         })
-
-let text = document.lastModified;
-document.getElementById("updated").innerHTML = text;
