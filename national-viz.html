@@ -7,9 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Aadit Tambe">
     <title>All-US TSA throughput data</title>
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- google fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Source+Serif+Pro&display=swap" rel="stylesheet">
 
     <style>
         #container {
@@ -29,6 +32,35 @@
             height: auto;
             margin-left: auto;
             margin-right: auto;
+        }
+
+        #legend {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: "Poppins", sans-serif;
+            color: #0a0a0a;
+            font-size: 1em;
+        }
+
+        .svg-text {
+            display: contents;
+        }
+
+        .legend-text {
+            margin-left: 5px;
+        }
+
+        .legend-svg2 {
+            margin-left: 15px;
+        }
+
+        .legend-svg3 {
+            margin-left: 15px;
+        }
+
+        .legend-svg4 {
+            margin-left: 15px;
         }
 
         @media only screen and (max-width: 600px) {
@@ -93,123 +125,41 @@
         <h4>BY AADIT TAMBE / CAPITAL NEWS SERVICE</h4>
         <h2>TSA says it's prepared for the surge in travelers, as numbers surge to pre-pandemic levels. Hover over each
             data point to see the number of passengers who crossed TSA checkpoints.</h2>
-        <div id="wrapper">
-            <canvas id="canvas">
-            </canvas>
+        <div id="legend">
+            <div class="svg-text">
+                <svg class="legend-svg1" width="13" height="13">
+                    <rect width="13" height="13" style="fill:#990000"></rect>
+                </svg>
+                <p class="legend-text">2022</p>
+            </div>
+            <div class="svg-text">
+                <svg class="legend-svg2" width="13" height="13">
+                    <rect width="13" height="13" style="fill:#2ec4b6"></rect>
+                </svg>
+                <p class="legend-text">2021</p>
+            </div>
+            <div class="svg-text">
+                <svg class="legend-svg3" width="13" height="13">
+                    <rect width="13" height="13" style="fill:#faa916"></rect>
+                </svg>
+                <p class="legend-text">2020</p>
+            </div>
+            <div class="svg-text">
+                <svg class="legend-svg4" width="13" height="13">
+                    <rect width="13" height="13" style="fill:#666666"></rect>
+                </svg>
+                <p class="legend-text">2019</p>
+            </div>
         </div>
+        <div id="chart"></div>
         <h4>Source: Transportation and Security Administration checkpoint travel numbers</h4>
-        <h4>This chart updates automatically with new data at 10 a.m. daily.</h4>
+        <h4>Last updated: <span id="updated"></span></h4>
     </div>
-    <script>
+    <script src="https://cdn.jsdelivr.net/npm/underscore@1.13.3/underscore-umd-min.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
 
-
-        let filename = "tsa.csv"
-
-        d3.csv(filename).then(function (loadedData) {
-            // console.log(loadedData)
-            let data_22 = [];
-            let data_21 = [];
-            let data_20 = [];
-            let data_19 = [];
-            let labels = [];
-            for (let i = 0; i < loadedData.length; i++) {
-
-                let year = loadedData[i].formatted_date;
-                labels.push(year);
-                let throughput_22 = loadedData[i]["2022-throughput"];
-                data_22.push(throughput_22);
-                let throughput_21 = loadedData[i]["2021-throughput"];
-                data_21.push(throughput_21);
-                let throughput_20 = loadedData[i]["2020-throughput"];
-                data_20.push(throughput_20);
-                let throughput_19 = loadedData[i]["2019-throughput"];
-                data_19.push(throughput_19);
-            }
-            window.chartColors = {/*CNS colors*/
-                red: '#990000',
-                yellow: '#fbd603',
-                grey: '#666666',
-                yellowAccent: '#faa916',
-                greenAccent: '#8fd694'
-            };
-
-
-            let options = {
-                type: 'line',
-                data: {
-                    labels: labels,
-                    datasets: [
-                        {
-                            label: "2022",
-                            backgroundColor: window.chartColors.greenAccent,
-                            borderColor: window.chartColors.greenAccent,
-                            data: data_22,
-                            fill: false,
-                            pointRadius: 1,
-                            pointHoverRadius: 1,
-                            borderWidth: 1
-                        },
-                        {
-                            label: "2021",
-                            backgroundColor: window.chartColors.red,
-                            borderColor: window.chartColors.red,
-                            data: data_21,
-                            fill: false,
-                            pointRadius: 1,
-                            pointHoverRadius: 1,
-                            borderWidth: 1,
-                        },
-                        {
-                            label: "2020",
-                            fill: false,
-                            backgroundColor: window.chartColors.yellow,
-                            borderColor: window.chartColors.yellow,
-                            data: data_20,
-                            pointRadius: 1,
-                            pointHoverRadius: 1,
-                            borderWidth: 1,
-                        },
-                        {
-                            label: "2019",
-                            fill: false,
-                            backgroundColor: window.chartColors.grey,
-                            borderColor: window.chartColors.grey,
-                            data: data_19,
-                            pointRadius: 1,
-                            pointHoverRadius: 1,
-                            borderWidth: 1,
-                        },
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    title: {
-                        display: true,
-                        text: 'Chart.js Line Chart'
-                    },
-                    tooltips: {
-                        enabled: true,
-                        mode: 'label'
-                    },
-                    hover: {
-                        mode: 'nearest',
-                        intersect: true
-                    },
-                    elements: {
-                        line: {
-                            tension: 0.5
-                        }
-                    }
-                }
-            };
-            var ctx = document.getElementById("canvas").getContext("2d");
-            var myLine = new Chart(ctx, options);
-            $(window).bind('beforeunload', function () {
-                console.log('reload');
-                myLine.update()
-            });
-        })
-    </script>
+    <script src="date.js"></script>
+    <script src="national.js"></script>
 </body>
 
 
