@@ -5,8 +5,6 @@ name: dc-scrape-clean-viz
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
-  push:
-    push:
   schedule:
     - cron: "0 14 * * *" # 9 a.m. every day
   workflow_dispatch:
