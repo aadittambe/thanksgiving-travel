@@ -6,7 +6,7 @@ if (chartWidth < 600) {
 
 const margin = { top: 10, right: 30, bottom: 30, left: 72 },
     width = chartWidth - margin.left - margin.right,
-    height = 400 - margin.top - margin.bottom;
+    height = 250 - margin.top - margin.bottom;
 
 
 let tooltip = d3.select("body")
