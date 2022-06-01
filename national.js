@@ -50,7 +50,7 @@ d3.csv("https://raw.githubusercontent.com/aadittambe/thanksgiving-travel/main/ts
             data = _.sortBy(data, 'date');
 
 
-            console.log(data)
+            // console.log(data)
             let x = d3.scaleTime()
                 .domain(d3.extent(data, function (d) { return d.date; }))
                 .range([0, width]);
